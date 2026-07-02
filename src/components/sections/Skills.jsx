@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { 
   FaReact, FaNodeJs, FaAws, FaDocker, FaGitAlt, FaFigma,
-  FaHtml5, FaCss3Alt, FaDatabase
+  FaHtml5, FaCss3Alt, FaDatabase, FaRobot
 } from 'react-icons/fa';
 import { 
   SiNextdotjs, SiTypescript, SiTailwindcss, SiExpress, 
@@ -28,11 +28,6 @@ const skillsData = [
     color: 'text-purple-400',
     skills: ['MongoDB', 'MySQL']
   },
-  {
-    category: 'Languages',
-    icon: FaGitAlt,
-    color: 'text-orange-400',
-    skills: ['C', 'C++', 'Java', 'JavaScript']
   },
 ];
 
@@ -108,7 +103,7 @@ export default function Skills() {
       </div>
 
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

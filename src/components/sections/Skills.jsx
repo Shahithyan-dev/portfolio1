@@ -27,8 +27,7 @@ const skillsData = [
     icon: FaDatabase,
     color: 'text-purple-400',
     skills: ['MongoDB', 'MySQL']
-  },
-  },
+  }
 ];
 
 function TiltCard({ children }) {

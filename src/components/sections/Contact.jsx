@@ -9,12 +9,20 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate network request
+    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+
+    const text = `*New Portfolio Contact*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Subject:* ${encodeURIComponent(subject)}%0A*Message:* ${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/916374235151?text=${text}`;
+
     setTimeout(() => {
       setIsSubmitting(false);
+      window.open(whatsappUrl, '_blank');
       e.target.reset();
-      alert('Message sent successfully!');
-    }, 1500);
+    }, 600);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Icosahedron } from '@react-three/drei';
@@ -24,11 +24,43 @@ function AnimatedIcosahedron() {
 }
 
 export default function Hero() {
-  const containerVariants = {
+  const [nameTyped, setNameTyped] = useState('');
+  const [isNameDone, setIsNameDone] = useState(false);
+  const fullName = "Shahithyan V";
+
+  useEffect(() => {
+    let currentIndex = 0;
+    let typingInterval;
+    
+    // Delay before typing starts to wait for the loading screen to finish
+    const startDelay = setTimeout(() => {
+      // Reset the string in case of Hot Module Reloading
+      setNameTyped('');
+      
+      typingInterval = setInterval(() => {
+        if (currentIndex < fullName.length) {
+          setNameTyped(fullName.substring(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typingInterval);
+          setTimeout(() => {
+            setIsNameDone(true);
+          }, 300); // Wait a tiny bit after typing finishes
+        }
+      }, 100);
+    }, 3200);
+
+    return () => {
+      clearTimeout(startDelay);
+      if (typingInterval) clearInterval(typingInterval);
+    };
+  }, []);
+
+  const contentVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.5 },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
@@ -51,22 +83,36 @@ export default function Hero() {
         </Canvas>
       </div>
 
-      <motion.div
-        className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
         <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-          <motion.h2 variants={itemVariants} className="text-xl md:text-2xl text-text-gray mb-4 font-light">
-            Hi, I'm Shahithyan V
-          </motion.h2>
           
-          <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6 inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-lg shadow-black/20"
+          >
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-accent-blue"></span>
+            </span>
+            <h2 className="text-sm md:text-base text-text-gray font-medium tracking-widest uppercase flex items-center">
+              Hi, I'm <span className="text-white font-bold ml-1">{nameTyped}</span>
+              {!isNameDone && <span className="inline-block w-1.5 h-4 bg-accent-blue ml-1 animate-pulse"></span>}
+            </h2>
+          </motion.div>
+          
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            animate={isNameDone ? "visible" : "hidden"}
+            className="flex flex-col items-center md:items-start w-full"
+          >
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="text-gradient inline-block min-h-[1.2em]">
               <TypeAnimation
                 sequence={[
-                  'Frontend Developer',
+                  'Full Stack Developer',
                   2000,
                   'Building Modern Web Applications',
                   2000,
@@ -78,7 +124,7 @@ export default function Hero() {
                 repeat={Infinity}
               />
             </span> <br />
-            <span className="text-3xl md:text-4xl">& ECE Student</span>
+            <span className="text-3xl md:text-4xl">& ECE Graduate</span>
           </motion.h1>
 
           <motion.p variants={itemVariants} className="text-base md:text-lg text-text-gray mb-10 max-w-xl mx-auto md:mx-0">
@@ -109,9 +155,15 @@ export default function Hero() {
               </MagneticButton>
             ))}
           </motion.div>
+          </motion.div>
         </div>
 
-        <motion.div variants={itemVariants} className="flex-1 flex justify-center md:justify-end">
+        <motion.div 
+          variants={itemVariants} 
+          initial="hidden"
+          animate={isNameDone ? "visible" : "hidden"}
+          className="flex-1 flex justify-center md:justify-end"
+        >
           <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full p-2 neon-glow-blue bg-gradient-to-tr from-accent-blue/30 to-accent-purple/30">
             <div className="w-full h-full rounded-full overflow-hidden border-2 border-white/20 glass flex items-center justify-center bg-black/50">
               <img
@@ -122,7 +174,7 @@ export default function Hero() {
             </div>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

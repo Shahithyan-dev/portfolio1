@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 @layer base {
+  * {
+    cursor: none !important;
+  }
+  
   body {
     @apply bg-background text-text-gray font-sans antialiased overflow-x-hidden;
   }

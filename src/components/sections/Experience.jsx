@@ -15,14 +15,14 @@ const experiences = [
   },
   {
     company: 'Electronics & Communication Engineering',
-    role: 'Student',
-    duration: 'Ongoing',
+    role: 'Graduate',
+    duration: 'Completed',
     responsibilities: [
-      'Pursuing degree in ECE with a strong focus on software development and full stack engineering.',
+      'Completed degree in ECE with a strong focus on software development and full stack engineering.',
       'Continuously learning and building personal projects to bridge the gap between hardware and software.',
       'Mastered core web technologies including React, Express, Node.js, and Databases.'
     ],
-    technologies: ['C/C++', 'Java', 'Web Technologies', 'Electronics']
+    technologies: ['Java', 'Web Technologies']
   }
 ];
 

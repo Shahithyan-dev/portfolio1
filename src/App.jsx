@@ -1,7 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import CustomCursor from './components/ui/CustomCursor';
 import Background from './components/ui/Background';
+import LoadingScreen from './components/ui/LoadingScreen';
+
 
 // Layout & Sections
 import Navbar from './components/layout/Navbar';
@@ -15,6 +18,8 @@ import TechStack from './components/sections/TechStack';
 import Contact from './components/sections/Contact';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     // Initialize Lenis for smooth scrolling
     const lenis = new Lenis({
@@ -43,6 +48,9 @@ function App() {
 
   return (
     <>
+      <AnimatePresence>
+        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
       <CustomCursor />
       <Background />
       <Navbar />

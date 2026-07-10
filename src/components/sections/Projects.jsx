@@ -4,6 +4,16 @@ import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
 
 const projects = [
   {
+    id: 0,
+    title: 'M.A.M. School of Engineering',
+    description: 'A comprehensive college website built with React and Next.js.',
+    longDescription: 'A comprehensive college website for M.A.M. School of Engineering. It features details about academics, admissions, and campus life. Built using modern web technologies to provide a fast and responsive user experience.',
+    image: '/projects/mam.png',
+    tech: ['React.js', 'Next.js', 'Tailwind CSS', 'JavaScript'],
+    github: 'https://github.com/Shahithyan-dev',
+    live: 'https://mam-college.vercel.app/',
+  },
+  {
     id: 1,
     title: 'ShopSphere E-Commerce',
     description: 'A comprehensive full-stack e-commerce platform built with React, Node.js, and MySQL.',
